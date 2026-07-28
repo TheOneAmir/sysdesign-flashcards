@@ -1,0 +1,44 @@
+#drip-overlay-root {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483647;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+  color: #0d1117;
+  background: #ffffff;
+  border: 1px solid #e3e0d8;
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(20, 18, 12, 0.22);
+  padding: 16px;
+  animation: drip-in 0.22s ease-out;
+}
+@keyframes drip-in {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+#drip-overlay-root .drip-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8577;
+  margin-bottom: 10px;
+}
+#drip-overlay-root .drip-x {
+  border: 0; background: transparent; cursor: pointer; font-size: 16px; line-height: 1; color: #8a8577;
+}
+#drip-overlay-root .drip-front { font-size: 15px; font-weight: 600; line-height: 1.4; }
+#drip-overlay-root .drip-back { margin-top: 10px; font-size: 13px; line-height: 1.55; color: #38352e; }
+#drip-overlay-root .drip-scen {
+  margin-top: 10px; font-size: 12px; line-height: 1.5; color: #5c5749;
+  background: #f6f4ee; border-radius: 8px; padding: 8px 10px;
+}
+#drip-overlay-root .drip-scen b { color: #b4530a; }
+#drip-overlay-root .drip-actions { display: flex; gap: 6px; margin-top: 14px; }
+#drip-overlay-root button.drip-btn {
+  flex: 1; cursor: pointer; border-radius: 8px; border: 1px solid #e3e0d8;
+  background: #faf9f6; padding: 7px 4px; font-size: 12px; font-weight: 600; color: #38352e;
+}
+#drip-overlay-root button.drip-btn:hover { background: #f0ede4; }
+#drip-overlay-root button.drip-primary {
+  background: #1f1d18; border-color: #1f1d18; color: #faf9f6;
+}

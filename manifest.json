@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Drip — Flashcards While You Browse",
+  "version": "1.0.0",
+  "description": "Surfaces spaced-repetition flashcards on new tabs, or as a gentle timed overlay. Ships with a deep System Design deck.",
+  "permissions": ["storage", "alarms", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "chrome_url_overrides": { "newtab": "newtab.html" },
+  "action": { "default_popup": "popup.html", "default_title": "Drip" },
+  "options_page": "options.html",
+  "icons": { "48": "icon.png", "128": "icon.png" }
+}

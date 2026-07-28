@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Drip · Decks</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      .wrap { max-width: 860px; margin: 0 auto; padding: 34px 20px 70px; }
+      h1 { font-size: 26px; margin: 6px 0 22px; }
+      h2 { font-size: 15px; margin: 0 0 14px; }
+      .panel + .panel { margin-top: 16px; }
+      .grid { display: grid; gap: 12px; }
+      .list { display: grid; gap: 8px; max-height: 380px; overflow: auto; margin-top: 12px; }
+      .item {
+        border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+        display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; font-size: 13px;
+      }
+      .item small { display: block; color: var(--muted); margin-top: 4px; }
+      .inline { display: flex; gap: 8px; }
+      .inline > * { flex: 1; }
+      .inline button { flex: 0 0 auto; }
+      .toggle { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; }
+      .toggle input { width: auto; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <span class="eyebrow">Drip</span>
+      <h1>Decks &amp; settings</h1>
+
+      <div class="panel">
+        <h2>Subject</h2>
+        <div class="inline">
+          <select id="subjectSelect"></select>
+          <button id="deleteSubject">Delete</button>
+        </div>
+        <div class="inline" style="margin-top: 10px">
+          <input id="newSubject" placeholder="New subject (e.g. Spanish Vocab)" />
+          <button class="primary" id="addSubject">Add</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Add a card</h2>
+        <div class="grid">
+          <div><label>Front</label><input id="front" /></div>
+          <div><label>Back</label><textarea id="back"></textarea></div>
+          <div><label>Commonly used in (optional)</label><input id="scenarios" /></div>
+          <div><label>Tags (comma separated)</label><input id="tags" /></div>
+          <div><button class="primary" id="addCard">Add card</button></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Bulk paste</h2>
+        <p class="muted" style="margin-top: -8px">
+          One card per line: <code>front, back, commonly used in, tag;tag</code> — or use <code>|</code> / <code>::</code> separators.
+        </p>
+        <textarea id="bulk" placeholder="What is a bloom filter?, Probabilistic set membership..., LSM lookups, storage"></textarea>
+        <div style="margin-top: 10px"><button class="primary" id="importBulk">Import</button> <span class="muted" id="bulkMsg"></span></div>
+      </div>
+
+      <div class="panel">
+        <h2>Triggers</h2>
+        <div class="toggle">
+          <div>New-tab reviews<br /><span class="muted">A card on every new tab. Zero interruption.</span></div>
+          <input type="checkbox" id="newTabEnabled" />
+        </div>
+        <div class="toggle">
+          <div>Aggressive mode<br /><span class="muted">Timed overlay in the active tab, even if you never open a new tab.</span></div>
+          <input type="checkbox" id="aggressiveMode" />
+        </div>
+        <div class="toggle">
+          <div>Interval (minutes)</div>
+          <input type="number" id="intervalMinutes" min="1" max="600" style="width: 100px" />
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Cards <span class="muted" id="count"></span></h2>
+        <div class="list" id="cardList"></div>
+      </div>
+    </div>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

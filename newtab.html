@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>New Tab · Drip</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      .wrap { min-height: 100vh; display: grid; place-items: center; padding: 32px; }
+      .stage { width: 100%; max-width: 620px; }
+      .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+      .foot { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="stage">
+        <div class="head">
+          <span class="eyebrow" id="subject">Drip</span>
+          <span class="muted" id="stats"></span>
+        </div>
+        <div class="panel" id="stage"></div>
+        <div class="foot">
+          <span class="muted">Space = show answer · 1/2/3/4 = grade</span>
+          <button id="manage">Manage decks</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="review.js"></script>
+  </body>
+</html>

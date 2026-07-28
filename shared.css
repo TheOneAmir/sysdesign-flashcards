@@ -1,0 +1,46 @@
+:root {
+  --bg: #faf9f6;
+  --panel: #ffffff;
+  --ink: #1f1d18;
+  --muted: #8a8577;
+  --line: #e3e0d8;
+  --accent: #b4530a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+}
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+.panel {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+}
+button {
+  font: inherit; cursor: pointer; border-radius: 9px; border: 1px solid var(--line);
+  background: #f6f4ee; color: var(--ink); padding: 8px 14px; font-weight: 600; font-size: 13px;
+}
+button:hover { background: #efece3; }
+button.primary { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+button.primary:hover { opacity: 0.9; }
+input, textarea, select {
+  font: inherit; width: 100%; padding: 9px 11px; border-radius: 9px;
+  border: 1px solid var(--line); background: #fff; color: var(--ink);
+}
+textarea { min-height: 110px; resize: vertical; }
+label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+a { color: var(--accent); }
+.row { display: flex; gap: 8px; align-items: center; }
+.card-front { font-size: 20px; font-weight: 650; line-height: 1.35; }
+.card-back { margin-top: 14px; font-size: 14px; line-height: 1.6; color: #38352e; }
+.scen {
+  margin-top: 14px; font-size: 13px; line-height: 1.55; color: #5c5749;
+  background: #f6f4ee; border-radius: 10px; padding: 11px 13px;
+}
+.scen b { color: var(--accent); }
+.grade { display: flex; gap: 8px; margin-top: 20px; }
+.grade button { flex: 1; }
+.muted { color: var(--muted); font-size: 12px; }
