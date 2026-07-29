@@ -7,7 +7,6 @@ const statsEl = document.getElementById("stats");
 document.getElementById("manage").addEventListener("click", () => chrome.runtime.openOptionsPage());
 
 let current = null;
-let revealed = false;
 
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, (c) =>
@@ -35,7 +34,6 @@ async function load() {
   }
 
   current = pickDue(cards);
-  revealed = false;
   render();
 }
 
@@ -46,28 +44,18 @@ function render() {
   }
   stage.innerHTML = `
     <div class="card-front">${esc(current.front)}</div>
-    ${
-      revealed
-        ? `<div class="card-back">${esc(current.back)}</div>
-           ${current.scenarios ? `<div class="scen"><b>Commonly used in:</b> ${esc(current.scenarios)}</div>` : ""}
-           <div class="grade">
-             <button data-g="0">Again</button>
-             <button data-g="3">Hard</button>
-             <button class="primary" data-g="4">Good</button>
-             <button data-g="5">Easy</button>
-           </div>`
-        : `<div class="grade"><button class="primary" id="show">Show answer</button></div>`
-    }`;
+    <div class="card-back">${esc(current.back)}</div>
+    ${current.scenarios ? `<div class="scen"><b>Commonly used in:</b> ${esc(current.scenarios)}</div>` : ""}
+    <div class="grade">
+      <button data-g="0">Again</button>
+      <button data-g="3">Hard</button>
+      <button class="primary" data-g="4">Good</button>
+      <button data-g="5">Easy</button>
+    </div>`;
 
-  document.getElementById("show")?.addEventListener("click", reveal);
   stage.querySelectorAll("[data-g]").forEach((b) =>
     b.addEventListener("click", () => grade(Number(b.dataset.g))),
   );
-}
-
-function reveal() {
-  revealed = true;
-  render();
 }
 
 async function grade(g) {
@@ -78,10 +66,7 @@ async function grade(g) {
 
 document.addEventListener("keydown", (e) => {
   if (!current) return;
-  if (!revealed && (e.code === "Space" || e.code === "Enter")) {
-    e.preventDefault();
-    reveal();
-  } else if (revealed && ["1", "2", "3", "4"].includes(e.key)) {
+  if (["1", "2", "3", "4"].includes(e.key)) {
     grade([0, 3, 4, 5][Number(e.key) - 1]);
   }
 });
