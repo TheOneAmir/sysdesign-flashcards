@@ -63,4 +63,10 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   }
 });
 
+chrome.action.onClicked.addListener(() => {
+  if (chrome.sidebarAction?.open) {
+    chrome.sidebarAction.open();
+  }
+});
+
 ensureSeeded().then(syncAlarm);

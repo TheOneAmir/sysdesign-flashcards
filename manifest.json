@@ -11,6 +11,9 @@
     "default_panel": "sidebar.html",
     "default_title": "Drip"
   },
+  "action": {
+    "default_title": "Drip"
+  },
   "options_page": "options.html",
   "icons": { "48": "icon.png", "128": "icon.png" }
 }
