@@ -1,7 +1,7 @@
 import { SEED_CARDS, SEED_SUBJECT } from "./seed.js";
 
 const DEFAULTS = {
-  settings: { newTabEnabled: true, aggressiveMode: false, intervalMinutes: 45 },
+  settings: { newTabEnabled: false, aggressiveMode: true, intervalMinutes: 45 },
   activeSubjectId: null,
   subjects: [],
   cards: [],

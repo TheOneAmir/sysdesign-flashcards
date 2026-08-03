@@ -12,19 +12,16 @@
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <div class="stage">
-        <div class="head">
-          <span class="eyebrow" id="subject">Drip</span>
-          <span class="muted" id="stats"></span>
-        </div>
-        <div class="panel" id="stage"></div>
-        <div class="foot">
-          <span class="muted">1 = Again · 2 = Hard · 3 = Good · 4 = Easy</span>
-          <button id="manage">Manage decks</button>
-        </div>
+    <div class="wrap" style="min-height:100vh;display:grid;place-items:center;padding:32px;">
+      <div class="panel" style="max-width:520px;text-align:center;">
+        <span class="eyebrow">Drip</span>
+        <h1 style="margin-top:12px;">Cards are shown in the sidebar.</h1>
+        <p class="muted" style="margin-top:10px;">Open the Drip sidebar to review flashcards. This page does not surface cards directly.</p>
+        <button id="manage" style="margin-top:20px;">Manage decks</button>
       </div>
     </div>
-    <script type="module" src="review.js"></script>
+    <script>
+      document.getElementById('manage').addEventListener('click', () => chrome.runtime.openOptionsPage());
+    </script>
   </body>
 </html>

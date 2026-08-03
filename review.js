@@ -23,16 +23,6 @@ async function load() {
   const due = cards.filter((c) => isDue(c)).length;
   statsEl.textContent = `${due} due · ${cards.length} cards`;
 
-  if (!state.settings.newTabEnabled) {
-    stage.innerHTML = `<div class="muted">New-tab reviews are off. <a href="#" id="on">Turn them on</a>.</div>`;
-    document.getElementById("on").addEventListener("click", async (e) => {
-      e.preventDefault();
-      await chrome.storage.local.set({ settings: { ...state.settings, newTabEnabled: true } });
-      load();
-    });
-    return;
-  }
-
   current = pickDue(cards);
   render();
 }
@@ -51,11 +41,13 @@ function render() {
       <button data-g="3">Hard</button>
       <button class="primary" data-g="4">Good</button>
       <button data-g="5">Easy</button>
+      <button id="next">Next card</button>
     </div>`;
 
   stage.querySelectorAll("[data-g]").forEach((b) =>
     b.addEventListener("click", () => grade(Number(b.dataset.g))),
   );
+  document.getElementById("next")?.addEventListener("click", () => load());
 }
 
 async function grade(g) {

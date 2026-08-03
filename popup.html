@@ -5,22 +5,20 @@
     <title>Drip</title>
     <link rel="stylesheet" href="shared.css" />
     <style>
-      body { width: 380px; padding: 14px; }
-      .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-      .card-front { font-size: 15px; }
-      .foot { margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+      body { width: 320px; padding: 18px; }
+      .panel { padding: 18px; }
+      button { width: 100%; }
     </style>
   </head>
   <body>
-    <div class="head">
-      <span class="eyebrow" id="subject">Drip</span>
-      <span class="muted" id="stats"></span>
+    <div class="panel">
+      <h2>Drip</h2>
+      <p class="muted">Opening the sidebar for flashcards...</p>
+      <div id="fallback" style="display:none;">
+        <p class="muted">Your browser does not support the extension side panel.</p>
+        <button id="manage">Open settings</button>
+      </div>
     </div>
-    <div class="panel" id="stage"></div>
-    <div class="foot">
-      <span class="muted">SM-2 scheduled</span>
-      <button id="manage">Manage decks</button>
-    </div>
-    <script type="module" src="review.js"></script>
+    <script src="popup.js"></script>
   </body>
 </html>

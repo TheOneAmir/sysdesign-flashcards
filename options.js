@@ -25,8 +25,6 @@ async function render() {
     .map((s) => `<option value="${s.id}" ${s.id === state.activeSubjectId ? "selected" : ""}>${esc(s.name)}</option>`)
     .join("");
 
-  $("newTabEnabled").checked = !!state.settings.newTabEnabled;
-  $("aggressiveMode").checked = !!state.settings.aggressiveMode;
   $("intervalMinutes").value = state.settings.intervalMinutes ?? 45;
 
   const cards = state.cards.filter((c) => c.subjectId === state.activeSubjectId);
@@ -96,16 +94,12 @@ $("importBulk").addEventListener("click", async () => {
   render();
 });
 
-for (const id of ["newTabEnabled", "aggressiveMode", "intervalMinutes"]) {
-  $(id).addEventListener("change", async () => {
-    await setState({
-      settings: {
-        newTabEnabled: $("newTabEnabled").checked,
-        aggressiveMode: $("aggressiveMode").checked,
-        intervalMinutes: Math.max(1, Number($("intervalMinutes").value) || 45),
-      },
-    });
+$("intervalMinutes").addEventListener("change", async () => {
+  await setState({
+    settings: {
+      intervalMinutes: Math.max(1, Number($("intervalMinutes").value) || 45),
+    },
   });
-}
+});
 
 render();
