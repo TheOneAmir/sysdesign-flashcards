@@ -149,6 +149,36 @@ export const SEED_CARDS = [
     tags: ["distributed", "availability"],
   },
   {
+    front: "What is a service mesh and why would you use one?",
+    back: "A service mesh is a dedicated infrastructure layer for service-to-service communication. It handles traffic management, security, observability, and resilience through sidecars or proxies without changing application code.",
+    scenarios: "Istio/Linkerd for mTLS, retries, circuit breaking, traffic shifting, and telemetry in microservice platforms.",
+    tags: ["networking", "reliability"],
+  },
+  {
+    front: "How do you handle schema changes in a live distributed database?",
+    back: "Use backward/forward-compatible changes, deploy consumers before producers for additive fields, version data formats, and run dual reads/writes when necessary. For DB schemas, add nullable columns, backfill gradually, then switch readers and remove old fields later.",
+    scenarios: "API evolution, database migrations, protobuf/Avro schema rollout.",
+    tags: ["databases", "reliability"],
+  },
+  {
+    front: "What is eventual consistency and how can clients cope with it?",
+    back: "Eventual consistency means replicas converge over time but may differ temporarily. Clients cope with idempotent operations, read-repair strategies, version vectors, or routing to a single source of truth for strong reads when needed.",
+    scenarios: "DNS, distributed caches, replicated catalogs, collaborative document editing.",
+    tags: ["consistency", "distributed"],
+  },
+  {
+    front: "How do you implement pagination for large result sets?",
+    back: "Use keyset pagination for stable, performant next/previous navigation; avoid OFFSET with deep pages. For APIs, return a cursor/token from the last seen item and sort by a unique deterministic key.",
+    scenarios: "Feed APIs, search results, user dashboards, mobile infinite scrolling.",
+    tags: ["api", "databases"],
+  },
+  {
+    front: "Design a chat system — key components.",
+    back: "Persistent WebSocket connections to a gateway layer, session registry in Redis, partitioned message storage by conversation_id, fan-out via pub/sub to active gateways, offline queue, and sequence IDs for ordering.",
+    scenarios: "Slack, WhatsApp, in-app support chat, multiplayer presence.",
+    tags: ["case-study", "realtime"],
+  },
+  {
     front: "Estimation drill: how do you size a system in an interview?",
     back: "DAU -> QPS (DAU x actions/day / 86400, peak = 2–10x average). Storage = objects/day x size x retention x replication factor. Bandwidth = QPS x payload. Memory for cache = hot set (80/20 rule). Sanity anchors: 1 SSD read ~100µs, network RTT same DC ~0.5ms, cross-region ~50–150ms, one commodity box ~10–50k simple QPS.",
     scenarios: "Opening 5 minutes of any system design interview — always state assumptions out loud and round aggressively.",

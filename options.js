@@ -10,11 +10,26 @@ import {
 } from "./store.js";
 
 const $ = (id) => document.getElementById(id);
+let currentFilter = "";
 
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
   );
+}
+
+function matchesFilter(card, filter) {
+  if (!filter) return true;
+  const needle = filter.toLowerCase();
+  const haystack = [card.front, card.back, card.scenarios, ...(card.tags || [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(needle);
+}
+
+function renderTags(tags) {
+  return tags?.length ? `<small>Tags: ${esc(tags.join(", "))}</small>` : "";
 }
 
 async function render() {
@@ -28,12 +43,14 @@ async function render() {
   $("intervalMinutes").value = state.settings.intervalMinutes ?? 45;
 
   const cards = state.cards.filter((c) => c.subjectId === state.activeSubjectId);
-  $("count").textContent = `· ${cards.length}`;
-  $("cardList").innerHTML = cards
+  const filteredCards = currentFilter ? cards.filter((c) => matchesFilter(c, currentFilter)) : cards;
+  $("count").textContent = `· ${filteredCards.length} / ${cards.length}`;
+  $("cardList").innerHTML = filteredCards
     .map(
       (c) => `<div class="item"><div><b>${esc(c.front)}</b>
         <small>${esc(c.back.slice(0, 160))}${c.back.length > 160 ? "…" : ""}</small>
         <small>next: ${c.nextReview ? new Date(c.nextReview).toLocaleDateString() : "now"} · ease ${(c.easeFactor ?? 2.5).toFixed(2)}</small>
+        ${renderTags(c.tags)}
       </div><button data-del="${c.id}">Delete</button></div>`,
     )
     .join("");
@@ -91,6 +108,17 @@ $("importBulk").addEventListener("click", async () => {
   await addCards(state.activeSubjectId, items);
   $("bulk").value = "";
   $("bulkMsg").textContent = `Imported ${items.length} cards.`;
+  render();
+});
+
+$("topicFilter").addEventListener("input", (e) => {
+  currentFilter = e.target.value.trim();
+  render();
+});
+
+$("clearFilter").addEventListener("click", () => {
+  currentFilter = "";
+  $("topicFilter").value = "";
   render();
 });
 
